@@ -1,0 +1,47 @@
+﻿@using Clase7.EF.IslaDelTesoro.Data.Entidades
+@model Clase7.EF.IslaDelTesoro.Data.Entidades.Tesoro
+@{
+    ViewData["Title"] = "Crear";
+}
+<form action="/Tesoros/Crear" method="post">
+
+    <div>
+        Nombre: <input type="text" name="Nombre" value="@Model.Nombre" />
+    </div>
+    <div>
+        Descripcion: <input type="text" name="Descripcion" value="@Model.Descripcion" />
+    </div>
+    <div>
+        Valor: <input type="text" name="Valor" value="@Model.Valor" />
+    </div>
+    <div>
+        ImagenUrl: <input type="text" name="ImagenUrl" value="@Model.ImagenUrl" />
+    </div>
+    <div>
+        <select name="IdUbicacion">
+            @foreach (Ubicacion ubicacion in ViewBag.Ubicaciones)
+            {
+                <option value="@ubicacion.Id">@ubicacion.Nombre</option>
+            }
+        </select>
+    </div>
+    <div>
+        @* <select name="IdCategoriaTesoros" multiple>
+        @foreach (CategoriaTesoro catTesoro in ViewBag.CategoriaTesoros)
+        {
+        <option value="@catTesoro.IdCategoriaTesoro">@catTesoro.Nombre</option>
+        }
+        </select>*@
+        <ul>
+            @foreach (CategoriaTesoro catTesoro in ViewBag.CategoriaTesoros)
+            {
+                <li>
+                    <input id="@catTesoro.IdCategoriaTesoro" type="checkbox" name="IdCategoriaTesoros" value="@catTesoro.IdCategoriaTesoro" />
+                    <label for="@catTesoro.IdCategoriaTesoro">@catTesoro.Nombre</label>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <input type="submit" value="Crear" />
+</form>
